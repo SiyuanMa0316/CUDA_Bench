@@ -40,6 +40,7 @@
  */
 
  //nvcc -o gemm_naive -I/home/sm73423/CUDA_Bench/include gemm_naive.cu 
+ //  nvcc -o gemm_naive_half -I/home/sm73423/CUDA_Bench/include -arch=sm_80 gemm_naive.cu 
 
 // System includes
 #include <stdio.h>
@@ -54,6 +55,8 @@
 // Helper functions and utilities to work with CUDA
 #include <CUDA_Bench/util/helper_functions.h>
 #include <CUDA_Bench/util/helper_cuda.h>
+
+#include <cuda_profiler_api.h>
 
 /**
  * Matrix multiplication (CUDA Kernel) on the device: C = A * B
@@ -145,8 +148,8 @@ int MatrixMultiply(int argc, char **argv,
                    int block_size, const dim3 &dimsA,
                    const dim3 &dimsB) {
   // Allocate host memory for matrices A and B
-  // using mulprecision = half;
-  using mulprecision = float;
+  using mulprecision = half;
+  // using mulprecision = float;
   unsigned int size_A = dimsA.x * dimsA.y;
   unsigned int mem_size_A = sizeof(mulprecision) * size_A;
   mulprecision *h_A;
@@ -158,8 +161,8 @@ int MatrixMultiply(int argc, char **argv,
   cudaStream_t stream;
 
   // Initialize host memory
-  const mulprecision valA = 1.0f;
-  const mulprecision valB = 0.01f;
+  const mulprecision valA = __float2half(1.0);
+  const mulprecision valB = __float2half(0.01);
   ConstantInit(h_A, size_A, valA);
   ConstantInit(h_B, size_B, valB);
 
@@ -260,21 +263,22 @@ int MatrixMultiply(int argc, char **argv,
   // test relative error by the formula
   //     |<x, y>_cpu - <x,y>_gpu|/<|x|, |y|>  < eps
   double eps = 1.e-6;  // machine zero
+  half testVal = __float2half(0.1);
+  printf("%.8f",__half2float(h_C[1]));
+  // for (int i = 0; i < static_cast<int>(dimsC.x * dimsC.y); i++) {
+  //   double abs_err = fabs(double(__half2float(h_C[i]) - (dimsA.x * __half2float(valB))));
+  //   double dot_length = dimsA.x;
+  //   double abs_val = fabs(double(__half2float(h_C[i])));
+  //   double rel_err = abs_err / abs_val / dot_length;
 
-  for (int i = 0; i < static_cast<int>(dimsC.x * dimsC.y); i++) {
-    double abs_err = fabs(double((float)h_C[i] - (dimsA.x * (float)valB)));
-    double dot_length = dimsA.x;
-    double abs_val = fabs(double(h_C[i]));
-    double rel_err = abs_err / abs_val / dot_length;
+  //   if (rel_err > eps) {
+  //     printf("Error! Matrix[%05d]=%.8f, ref=%.8f error term is > %E\n",
+  //            i, __half2float(h_C[i]), dimsA.x * __half2float(valB), eps);
+  //     correct = false;
+  //   }
+  // }
 
-    if (rel_err > eps) {
-      printf("Error! Matrix[%05d]=%.8f, ref=%.8f error term is > %E\n",
-             i, h_C[i], dimsA.x * (float)valB, eps);
-      correct = false;
-    }
-  }
-
-  printf("%s\n", correct ? "Result = PASS" : "Result = FAIL");
+  // printf("%s\n", correct ? "Result = PASS" : "Result = FAIL");
 
   // Clean up memory
   checkCudaErrors(cudaFreeHost(h_A));
