@@ -64,6 +64,9 @@ else:
     elif args.p == "fp16":
         A = torch.randn(M, K, dtype=torch.float16).to(device)
         B = torch.randn(K, N, dtype=torch.float16).to(device)
+    # elif args.p == "int8":
+    #     A = torch.randint(-128, 127, (M, K), dtype=torch.int8).to(device)
+    #     B = torch.randint(-128, 127, (K, N), dtype=torch.int8).to(device)
     else:
         raise ValueError("Unsupported precision. Use 'fp32' or 'fp16'.")
     print(f"Matrix A: {A.shape}")
