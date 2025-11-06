@@ -3,6 +3,10 @@ dim_i=(4096 16384 16384 32 1024)
 dim_j=(4096 16384 32 16384 4096)
 dim_k=(4096 16384 4096 4096 16384)
 num_tests=${#dim_i[@]}
+
+#make logs directory if it doesn't exist
+mkdir -p logs
+
 for ((i=0; i<num_tests; i++)); do
   ./nvml_gpu_profiler -c "../src/gemm/gemm_naive_float -wA=${dim_k[i]} -hA=${dim_i[i]} -wB=${dim_j[i]} -hB=${dim_k[i]}" -o logs/gemm_cuda_fp32_${dim_i[i]}x${dim_j[i]}x${dim_k[i]}_nvml_log.csv
 done
