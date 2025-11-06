@@ -1,0 +1,12 @@
+[Matrix Multiply Using CUDA] - Starting...
+GPU Device 0: "Ampere" with compute capability 8.0
+
+MatrixA(16384,32), MatrixB(4096,16384)
+Warming up using CUDA Kernel...
+Warming up done
+performing 1000 CUDA Kernel iterations...
+Kernel execution done
+Performance= 2211.27 GFlop/s, Time= 1.942 msec, Size= 4294967296 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.

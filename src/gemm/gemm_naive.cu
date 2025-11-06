@@ -148,8 +148,8 @@ int MatrixMultiply(int argc, char **argv,
                    int block_size, const dim3 &dimsA,
                    const dim3 &dimsB) {
   // Allocate host memory for matrices A and B
-  using mulprecision = half;
-  // using mulprecision = float;
+  // using mulprecision = half;
+  using mulprecision = float;
   unsigned int size_A = dimsA.x * dimsA.y;
   unsigned int mem_size_A = sizeof(mulprecision) * size_A;
   mulprecision *h_A;
@@ -161,8 +161,8 @@ int MatrixMultiply(int argc, char **argv,
   cudaStream_t stream;
 
   // Initialize host memory
-  const mulprecision valA = __float2half(1.0);
-  const mulprecision valB = __float2half(0.01);
+  const mulprecision valA = float(1.0);
+  const mulprecision valB = float(0.01);
   ConstantInit(h_A, size_A, valA);
   ConstantInit(h_B, size_B, valB);
 
@@ -201,7 +201,7 @@ int MatrixMultiply(int argc, char **argv,
   dim3 grid(dimsB.x / threads.x, dimsA.y / threads.y);
 
   // Create and start timer
-  printf("Computing result using CUDA Kernel...\n");
+  printf("Warming up using CUDA Kernel...\n");
 
   // Performs warmup operation using matrixMul CUDA kernel
   if (block_size == 16) {
@@ -212,7 +212,7 @@ int MatrixMultiply(int argc, char **argv,
         <<<grid, threads, 0, stream>>>(d_C, d_A, d_B, dimsA.x, dimsB.x);
   }
 
-  printf("done\n");
+  printf("Warming up done\n");
   checkCudaErrors(cudaStreamSynchronize(stream));
 
   // Record the start event
@@ -220,7 +220,7 @@ int MatrixMultiply(int argc, char **argv,
 
   // Execute the kernel
   int nIter = 1000;
-
+  printf("performing %d CUDA Kernel iterations...\n", nIter);
   for (int j = 0; j < nIter; j++) {
     if (block_size == 16) {
       MatrixMulCUDA<16, mulprecision>
@@ -230,6 +230,7 @@ int MatrixMultiply(int argc, char **argv,
           <<<grid, threads, 0, stream>>>(d_C, d_A, d_B, dimsA.x, dimsB.x);
     }
   }
+  printf("Kernel execution done\n");
 
   // Record the stop event
   checkCudaErrors(cudaEventRecord(stop, stream));
@@ -263,22 +264,22 @@ int MatrixMultiply(int argc, char **argv,
   // test relative error by the formula
   //     |<x, y>_cpu - <x,y>_gpu|/<|x|, |y|>  < eps
   double eps = 1.e-6;  // machine zero
-  half testVal = __float2half(0.1);
-  printf("%.8f",__half2float(h_C[1]));
-  // for (int i = 0; i < static_cast<int>(dimsC.x * dimsC.y); i++) {
-  //   double abs_err = fabs(double(__half2float(h_C[i]) - (dimsA.x * __half2float(valB))));
-  //   double dot_length = dimsA.x;
-  //   double abs_val = fabs(double(__half2float(h_C[i])));
-  //   double rel_err = abs_err / abs_val / dot_length;
+  // half testVal = __float2half(0.1);
+  // printf("%.8f",__half2float(h_C[1]));
+  for (int i = 0; i < static_cast<int>(dimsC.x * dimsC.y); i++) {
+    double abs_err = fabs(double((h_C[i]) - (dimsA.x * (valB))));
+    double dot_length = dimsA.x;
+    double abs_val = fabs(double(h_C[i]));
+    double rel_err = abs_err / abs_val / dot_length;
 
-  //   if (rel_err > eps) {
-  //     printf("Error! Matrix[%05d]=%.8f, ref=%.8f error term is > %E\n",
-  //            i, __half2float(h_C[i]), dimsA.x * __half2float(valB), eps);
-  //     correct = false;
-  //   }
-  // }
+    if (rel_err > eps) {
+      printf("Error! Matrix[%05d]=%.8f, ref=%.8f error term is > %E\n",
+             i, h_C[i], dimsA.x * valB, eps);
+      correct = false;
+    }
+  }
 
-  // printf("%s\n", correct ? "Result = PASS" : "Result = FAIL");
+  printf("%s\n", correct ? "Result = PASS" : "Result = FAIL");
 
   // Clean up memory
   checkCudaErrors(cudaFreeHost(h_A));
@@ -350,6 +351,15 @@ int main(int argc, char **argv) {
   if (dimsA.x != dimsB.y) {
     printf("Error: outer matrix dimensions must be equal. (%d != %d)\n",
            dimsA.x, dimsB.y);
+    exit(EXIT_FAILURE);
+  }
+
+  if ((dimsA.x % block_size != 0) ||
+      (dimsA.y % block_size != 0) ||
+      (dimsB.x % block_size != 0) ||
+      (dimsB.y % block_size != 0)) {
+    printf("Error: matrix sizes must be multiples of block size %d x %d\n",
+           block_size, block_size);
     exit(EXIT_FAILURE);
   }
 
