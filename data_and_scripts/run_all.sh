@@ -24,7 +24,7 @@ for ((i=0; i<num_tests; i++)); do
 done
 
 for ((i=0; i<num_tests; i++)); do
-  ./nvml_gpu_profiler -c "../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 ${dim_i[i]} ${dim_j[i]} ${dim_k[i]}" -o logs/gemm_cublas_fp16_cc_${dim_i[i]}x${dim_j[i]}x${dim_k[i]}_nvml_log.csv
+  ../nvml_gpu_profiler -c "../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 ${dim_i[i]} ${dim_j[i]} ${dim_k[i]}" -o logs/gemm_cublas_fp16_cc_${dim_i[i]}x${dim_j[i]}x${dim_k[i]}_nvml_log.csv
 done
 
 for ((i=0; i<num_tests; i++)); do
