@@ -21,6 +21,9 @@ def parse_filename(filename):
     return None, None
 
 def compute_energy_runtime(file_path):
+    import pandas as pd
+    import numpy as np
+
     try:
         df = pd.read_csv(file_path)
     except Exception:
@@ -34,10 +37,27 @@ def compute_energy_runtime(file_path):
     if len(time) < 2:
         return None, None, None
 
-    # Trapezoidal integration for energy (Joules)
-    total_energy = ((power[:-1] + power[1:]) / 2 * (time[1:] - time[:-1])).sum()
-    total_runtime = time[-1] - time[0]
+    # Mask: only keep samples where workload is active (power > 100 W)
+    active_mask = power > 100
+
+    # If there are no active samples, skip this file
+    if not np.any(active_mask):
+        return None, None, None
+
+    # Extract continuous segments where power > 100
+    active_indices = np.where(active_mask)[0]
+
+    # Optionally, handle discontinuous segments — keep only between first and last active samples
+    start_idx, end_idx = active_indices[0], active_indices[-1]
+
+    active_time = time[start_idx:end_idx + 1]
+    active_power = power[start_idx:end_idx + 1]
+
+    # Compute total energy using trapezoidal rule
+    total_energy = np.trapezoid(active_power, active_time)  # Joules (W·s)
+    total_runtime = active_time[-1] - active_time[0]
     avg_power = total_energy / total_runtime if total_runtime > 0 else 0
+
     return total_energy, total_runtime, avg_power
 
 def main():

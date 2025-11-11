@@ -1,0 +1,772 @@
+[Matrix Multiply Using CUDA] - Starting...
+GPU Device 0: "Ampere" with compute capability 8.0
+
+MatrixA(4096,4096), MatrixB(4096,4096)
+Computing result using CUDA Kernel...
+done
+Performance= 5352.32 GFlop/s, Time= 25.678 msec, Size= 137438953472 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cuda_fp32_4096x4096x4096_nvml_log.csv
+Executing command: ../src/gemm/gemm_naive_float -wA=4096 -hA=4096 -wB=4096 -hB=4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[Matrix Multiply Using CUDA] - Starting...
+GPU Device 0: "Ampere" with compute capability 8.0
+
+MatrixA(4096,16384), MatrixB(32,4096)
+Computing result using CUDA Kernel...
+done
+Performance= 4859.34 GFlop/s, Time= 0.884 msec, Size= 4294967296 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cuda_fp32_16384x32x4096_nvml_log.csv
+Executing command: ../src/gemm/gemm_naive_float -wA=4096 -hA=16384 -wB=32 -hB=4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[Matrix Multiply Using CUDA] - Starting...
+GPU Device 0: "Ampere" with compute capability 8.0
+
+MatrixA(4096,32), MatrixB(16384,4096)
+Computing result using CUDA Kernel...
+done
+Performance= 4834.60 GFlop/s, Time= 0.888 msec, Size= 4294967296 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cuda_fp32_32x16384x4096_nvml_log.csv
+Executing command: ../src/gemm/gemm_naive_float -wA=4096 -hA=32 -wB=16384 -hB=4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[Matrix Multiply Using CUDA] - Starting...
+GPU Device 0: "Ampere" with compute capability 8.0
+
+MatrixA(16384,1024), MatrixB(4096,16384)
+Computing result using CUDA Kernel...
+done
+Performance= 5331.20 GFlop/s, Time= 25.780 msec, Size= 137438953472 Ops, WorkgroupSize= 1024 threads/block
+Checking computed result for correctness: Result = PASS
+
+NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cuda_fp32_1024x4096x16384_nvml_log.csv
+Executing command: ../src/gemm/gemm_naive_float -wA=16384 -hA=1024 -wB=4096 -hB=16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([4096, 4096])
+Matrix B: torch.Size([4096, 4096])
+Time taken for 1000 iterations: 7333.1613 ms
+Time taken for one iteration: 7.3332 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp32_4096x4096x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp32 --gpu 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([16384, 32])
+Matrix B: torch.Size([32, 4096])
+Time taken for 1000 iterations: 290.2489 ms
+Time taken for one iteration: 0.2902 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp32_16384x32x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp32 --gpu 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([32, 16384])
+Matrix B: torch.Size([16384, 4096])
+Time taken for 1000 iterations: 320.3573 ms
+Time taken for one iteration: 0.3204 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp32_32x16384x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp32 --gpu 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([1024, 4096])
+Matrix B: torch.Size([4096, 16384])
+Time taken for 1000 iterations: 7355.0291 ms
+Time taken for one iteration: 7.3550 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp32_1024x4096x16384_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp32 --gpu 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 7275.74ms for 1000 iterations (7.27574ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp32_cc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 312.027ms for 1000 iterations (0.312027ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp32_cc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 370.38ms for 1000 iterations (0.37038ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp32_cc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 7609.61ms for 1000 iterations (7.60961ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp32_cc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 7802.21ms for 1000 iterations (7.80221ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp32_cc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 1581.55ms for 1000 iterations (1.58155ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp32_cc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 1581.98ms for 1000 iterations (1.58198ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp32_cc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 9404.03ms for 1000 iterations (9.40403ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp32_cc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp32 --accprecision fp32 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 3872.4ms for 1000 iterations (3.8724ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_cc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 336.636ms for 1000 iterations (0.336636ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_cc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 528.822ms for 1000 iterations (0.528822ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_cc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 3769.48ms for 1000 iterations (3.76948ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_cc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 4199.72ms for 1000 iterations (4.19972ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_cc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 893.273ms for 1000 iterations (0.893273ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_cc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 887.015ms for 1000 iterations (0.887015ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_cc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 5186.96ms for 1000 iterations (5.18696ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_cc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --cudacoresonly --mulprecision fp16 --accprecision fp16 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([4096, 4096])
+Matrix B: torch.Size([4096, 4096])
+Time taken for 1000 iterations: 594.5300 ms
+Time taken for one iteration: 0.5945 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp16_4096x4096x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp16 --gpu 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([16384, 32])
+Matrix B: torch.Size([32, 4096])
+Time taken for 1000 iterations: 132.7643 ms
+Time taken for one iteration: 0.1328 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp16_16384x32x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp16 --gpu 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([32, 16384])
+Matrix B: torch.Size([16384, 4096])
+Time taken for 1000 iterations: 109.6437 ms
+Time taken for one iteration: 0.1096 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp16_32x16384x4096_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp16 --gpu 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([1024, 4096])
+Matrix B: torch.Size([4096, 16384])
+Time taken for 1000 iterations: 590.4353 ms
+Time taken for one iteration: 0.5904 ms
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_torch_fp16_1024x4096x16384_nvml_log.csv
+Executing command: python3 ../src/gemm/gemm_torch.py -i 1000 -p fp16 --gpu 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 552.815ms for 1000 iterations (0.552815ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_tc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --mulprecision fp16 --accprecision fp16 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 159.57ms for 1000 iterations (0.15957ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_tc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --mulprecision fp16 --accprecision fp16 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 164.244ms for 1000 iterations (0.164244ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_tc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --mulprecision fp16 --accprecision fp16 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUBLAS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 563.282ms for 1000 iterations (0.563282ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cublas_fp16_tc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --usecublas --mulprecision fp16 --accprecision fp16 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 530.772ms for 1000 iterations (0.530772ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_tc_4096x4096x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --mulprecision fp16 --accprecision fp16 --iterations 1000 4096 4096 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 138.449ms for 1000 iterations (0.138449ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_tc_16384x32x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --mulprecision fp16 --accprecision fp16 --iterations 1000 16384 32 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 138.07ms for 1000 iterations (0.13807ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_tc_32x16384x4096_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --mulprecision fp16 --accprecision fp16 --iterations 1000 32 16384 4096
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
+[INFO] CUDA Bench - General Matrix-Matrix Multiplication (GEMM) 
+[INFO] Version 1.0.0 (C)2022 Bagus Hanindhito 
+[INFO] Matrix-Matrix multiplication follows equation: C = (alpha)x(AxB) + (beta)xC
+[INFO] where alpha=1.00, beta=0.00, and A[MxK], B[KxN], and C[MxN] are matrices 
+
+
+[INFO] Program is using NVIDIA CUTLASS library for GEMM
+[INFO] Detected 1 CUDA-capable device(s)
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |#  |Device Name             |CC  |#SM |Freq. (MHz)|Mem. Size (MB)|Mem. BW (GB/s)|
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[INFO] |0  |NVIDIA A100-SXM4-40GB   |8.0 |108 |1410       |40626         |1555.2        |
+[INFO] +---+------------------------+----+----+-----------+--------------+--------------+
+[WARN] This program does not currently support Multi-GPU run.
+[INFO] Execution Time: 604.548ms for 1000 iterations (0.604548ms/iteration)
+GPU monitoring started with interval 1.00 ms
+Results will be saved to: logs/gemm_cutlass_fp16_tc_1024x4096x16384_nvml_log.csv
+Executing command: ../bin/gemm_cuda_bench --mulprecision fp16 --accprecision fp16 --iterations 1000 1024 4096 16384
+Monitoring GPU: NVIDIA A100-SXM4-40GB
+Command completed with return code: 0
+Waiting for monitoring thread to finish...
+Monitoring thread exiting
+Cleaning up resources...
+Monitoring finished
