@@ -12,8 +12,6 @@
 #include <cutlass/cutlass.h>
 #include <cutlass/gemm/device/gemm.h>
 
-#include <nvbench/nvbench.cuh>
-
 int gemm_cutlass()
 {
      // Detect Available CUDA Devices
@@ -21,6 +19,18 @@ int gemm_cutlass()
     gpuErrchk(cudaGetDeviceCount(&nDevices));
     print_cuda_device_info(nDevices);
     if(nDevices>0) {std::cout << "[WARN] This program does not currently support Multi-GPU run.\n";}
+
+    if(gdevice<nDevices)
+    {
+        std::cout << "[INFO] Using GPU index " << gdevice << " to run the benchmark." << std::endl;
+        gpuErrchk(cudaSetDevice(gdevice));
+    }
+    else
+    {
+        std::cout << "[ERR!] Invalid GPU index " << gdevice << "!" << std::endl;
+        exit(1);
+    }
+
 
     // Detect Device Capability
     cudaDeviceProp props;
@@ -33,6 +43,9 @@ int gemm_cutlass()
         case 75: {gpuarch=GPUARCH_TURING; break;}
         case 80: {gpuarch=GPUARCH_AMPERE; break;}
         case 86: {gpuarch=GPUARCH_AMPERE; break;}
+        case 89: {gpuarch=GPUARCH_AMPERE; break;} // Temporary fix for Ada Lovelace
+        case 100: {gpuarch=GPUARCH_AMPERE; break;} // Temporary fix for blackwell
+        case 120: {gpuarch=GPUARCH_AMPERE; break;} // Temporary fix for blackwell
         default: {gpuarch=GPUARCH_OTHER; break;}
     }
     
@@ -49,20 +62,17 @@ int gemm_cutlass()
         {
             case GPUARCH_VOLTA : 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp64_fp64_fp64_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_volta_fp64_fp64_fp64_ntc();}
+                gemm_cutlass_launch_volta_fp64_fp64_fp64_ntc();
                 break;
             }
             case GPUARCH_TURING: 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp64_fp64_fp64_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_turing_fp64_fp64_fp64_ntc();}
+                gemm_cutlass_launch_turing_fp64_fp64_fp64_ntc();
                 break;
             }
             case GPUARCH_AMPERE: 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp64_fp64_fp64_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_ampere_fp64_fp64_fp64_ntc();}
+                gemm_cutlass_launch_ampere_fp64_fp64_fp64_ntc();
                 break;
             }
             default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -79,20 +89,17 @@ int gemm_cutlass()
         {
             case GPUARCH_VOLTA : 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp32_fp32_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_volta_fp32_fp32_fp32_ntc();}
+                gemm_cutlass_launch_volta_fp32_fp32_fp32_ntc();
                 break;
             }
             case GPUARCH_TURING: 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp32_fp32_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_turing_fp32_fp32_fp32_ntc();}
+                gemm_cutlass_launch_turing_fp32_fp32_fp32_ntc();
                 break;
             }
             case GPUARCH_AMPERE: 
             {
-                if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp32_fp32_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                else{gemm_cutlass_launch_ampere_fp32_fp32_fp32_ntc();}
+                gemm_cutlass_launch_ampere_fp32_fp32_fp32_ntc();
                 break;
             }
             default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -106,20 +113,17 @@ int gemm_cutlass()
             {
                 case GPUARCH_VOLTA : 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp32_fp16_fp32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_volta_fp32_fp16_fp32_tc();}
+                    gemm_cutlass_launch_volta_fp32_fp16_fp32_tc();
                     break;
                 }
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp32_fp16_fp32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_fp32_fp16_fp32_tc();}
+                    gemm_cutlass_launch_turing_fp32_fp16_fp32_tc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp32_fp16_fp32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_fp32_fp16_fp32_tc();}
+                    gemm_cutlass_launch_ampere_fp32_fp16_fp32_tc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -132,20 +136,17 @@ int gemm_cutlass()
             {
                 case GPUARCH_VOLTA : 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp32_fp16_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_volta_fp32_fp16_fp32_ntc();}
+                    gemm_cutlass_launch_volta_fp32_fp16_fp32_ntc();
                     break;
                 }
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp32_fp16_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_fp32_fp16_fp32_ntc();}
+                    gemm_cutlass_launch_turing_fp32_fp16_fp32_ntc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp32_fp16_fp32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_fp32_fp16_fp32_ntc();}
+                    gemm_cutlass_launch_ampere_fp32_fp16_fp32_ntc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -161,20 +162,17 @@ int gemm_cutlass()
             {
                 case GPUARCH_VOLTA : 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp16_fp16_fp16_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_volta_fp16_fp16_fp16_tc();}
+                    gemm_cutlass_launch_volta_fp16_fp16_fp16_tc();
                     break;
                 }
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp16_fp16_fp16_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_fp16_fp16_fp16_tc();}
+                    gemm_cutlass_launch_turing_fp16_fp16_fp16_tc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp16_fp16_fp16_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_fp16_fp16_fp16_tc();}
+                    gemm_cutlass_launch_ampere_fp16_fp16_fp16_tc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -187,20 +185,17 @@ int gemm_cutlass()
             {
                 case GPUARCH_VOLTA : 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_fp16_fp16_fp16_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_volta_fp16_fp16_fp16_ntc();}
+                    gemm_cutlass_launch_volta_fp16_fp16_fp16_ntc();
                     break;
                 }
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_fp16_fp16_fp16_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_fp16_fp16_fp16_ntc();}
+                    gemm_cutlass_launch_turing_fp16_fp16_fp16_ntc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_fp16_fp16_fp16_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_fp16_fp16_fp16_ntc();}
+                    gemm_cutlass_launch_ampere_fp16_fp16_fp16_ntc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -218,14 +213,12 @@ int gemm_cutlass()
                 case GPUARCH_VOLTA : {std::cout << "[ERR!] Volta Tensor Cores do not support int8. Please use CUDA Cores instead\n"; exit(1); break;}
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_int32_int8_int32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_int32_int8_int32_tc();}
+                    gemm_cutlass_launch_turing_int32_int8_int32_tc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_int32_int8_int32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_int32_int8_int32_tc();}
+                    gemm_cutlass_launch_ampere_int32_int8_int32_tc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -238,20 +231,17 @@ int gemm_cutlass()
             {
                 case GPUARCH_VOLTA : 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_volta_int32_int8_int32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_volta_int32_int8_int32_ntc();}
+                    gemm_cutlass_launch_volta_int32_int8_int32_ntc();
                     break;
                 }
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_int32_int8_int32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_int32_int8_int32_ntc();}
+                    gemm_cutlass_launch_turing_int32_int8_int32_ntc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_int32_int8_int32_ntc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_int32_int8_int32_ntc();}
+                    gemm_cutlass_launch_ampere_int32_int8_int32_ntc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
@@ -268,14 +258,12 @@ int gemm_cutlass()
                 case GPUARCH_VOLTA : {std::cout << "[ERR!] Volta Tensor Cores do not support int4\n"; exit(1); break;}
                 case GPUARCH_TURING: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_turing_int32_int4_int32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_turing_int32_int4_int32_tc();}
+                    gemm_cutlass_launch_turing_int32_int4_int32_tc();
                     break;
                 }
                 case GPUARCH_AMPERE: 
                 {
-                    if(gprofiling){NVBENCH_BENCH(gemm_cutlass_launch_ampere_int32_int4_int32_tc); NVBENCH_MAIN_BODY(gargc_nvbench, gargv_nvbench); }
-                    else{gemm_cutlass_launch_ampere_int32_int4_int32_tc();}
+                    gemm_cutlass_launch_ampere_int32_int4_int32_tc();
                     break;
                 }
                 default: {std::cout << "[ERR!] GPU Compute Capability is lower than it is required\n"; exit(1); break;}
