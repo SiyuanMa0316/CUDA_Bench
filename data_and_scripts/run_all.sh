@@ -9,7 +9,7 @@ dim_i=(16384)
 dim_j=(16384)
 dim_k=(16384)
 num_tests=${#dim_i[@]}
-gpu=7
+gpu=3
 export CUDA_VISIBLE_DEVICES=$gpu
 #make logs directory if it doesn't exist
 mkdir -p logs
