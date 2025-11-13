@@ -5,25 +5,27 @@
 #include <hip/amd_detail/amd_hip_fp16.h>
 #include <rocblas/rocblas.h>
 #include <rocblas/internal/rocblas_xfloat32.h>
-#include <rocblas/internal/rocblas_float8.h>
+//#include <rocblas/internal/rocblas_float8.h>
 #include <GPU_Roofline_Tools/launcher/rocm/rocblas_launch.hip.h>
+#include <GPU_Roofline_Tools/launcher/rocm/init_matrix.hip.h>
 #include <GPU_Roofline_Tools/utils/rocm/hipcheck.hip.h>
 #include <GPU_Roofline_Tools/utils/common/ptype.h>
 #include <GPU_Roofline_Tools/utils/common/metrics.h>
 #include <GPU_Roofline_Tools/utils/common/global.h>
 
 
-metrics rocblas_launch_fp8_fp32_fp32(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz)
-{
-    //FP8 multiply, FP32 accumulate, FP32 compute
-    return rocblas_launch_float8_beta<rocblas_f8,float,float>(dim_M, dim_N, dim_K, dev_wf_sz, FP8, FP32, FP32);
-}
 
-metrics rocblas_launch_bf8_fp32_fp32(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz)
-{
-    //BF8 multiply, FP32 accumulate, FP32 compute
-    return rocblas_launch_float8_beta<rocblas_bf8,float,float>(dim_M, dim_N, dim_K, dev_wf_sz, FP8, FP32, FP32);
-}
+//metrics rocblas_launch_fp8_fp32_fp32(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz)
+//{
+//    //FP8 multiply, FP32 accumulate, FP32 compute
+//    return rocblas_launch_float8_beta<rocblas_f8,float,float>(dim_M, dim_N, dim_K, dev_wf_sz, FP8, FP32, FP32);
+//}
+//
+//metrics rocblas_launch_bf8_fp32_fp32(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz)
+//{
+//    //BF8 multiply, FP32 accumulate, FP32 compute
+//    return rocblas_launch_float8_beta<rocblas_bf8,float,float>(dim_M, dim_N, dim_K, dev_wf_sz, FP8, FP32, FP32);
+//}
 
 metrics rocblas_launch_fp16_fp16_fp16(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz)
 {
@@ -126,6 +128,10 @@ inline metrics rocblas_launch(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, ui
     hipErrchk(hipMalloc((void**)&dev_buf_B, dim_K * dim_N * sizeof(TMul)));
     hipErrchk(hipMalloc((void**)&dev_buf_C, dim_M * dim_N * sizeof(TAcc)));
 
+    hipLaunchKernelGGL(HIP_KERNEL_NAME(initialize_colnegpos_matrix<TMul>), dim3(((dim_M*dim_K)+512-1)/512), dim3(512), 0, 0,  dev_buf_A, dim_M, dim_K, (TMul) 1.0);
+    hipLaunchKernelGGL(HIP_KERNEL_NAME(initialize_colposneg_matrix<TMul>), dim3(((dim_M*dim_K)+512-1)/512), dim3(512), 0, 0,  dev_buf_B, dim_K, dim_N, (TMul) 1.0);
+    hipLaunchKernelGGL(HIP_KERNEL_NAME(initialize_matrix<TAcc>), dim3(((dim_M*dim_K)+512-1)/512), dim3(512), 0, 0,  dev_buf_C, dim_M, dim_N, (TAcc) 1.0);
+
     // Launching rocBLAS GEMM
     gpu_elapsed_time_ms = 0.0;
     #pragma unroll
@@ -192,7 +198,7 @@ inline metrics rocblas_launch(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, ui
     return run_metrics;
 }
 
-
+/*
 template<typename TMul, typename TAcc, typename TScale>
 inline metrics rocblas_launch_float8_beta(uint64_t dim_M, uint64_t dim_N, uint64_t dim_K, uint32_t dev_wf_sz, ptype mulOp, ptype accOp, ptype scaleOp)
 {
@@ -297,3 +303,4 @@ inline metrics rocblas_launch_float8_beta(uint64_t dim_M, uint64_t dim_N, uint64
 
     return run_metrics;
 }
+*/
