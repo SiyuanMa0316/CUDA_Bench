@@ -1,0 +1,6 @@
+Device: cuda
+Number of iterations: 1000
+Matrix A: torch.Size([16384, 16384])
+Matrix B: torch.Size([16384, 16384])
+Time taken for 1000 iterations: 15665.1976 ms
+Time taken for one iteration: 15.6652 ms

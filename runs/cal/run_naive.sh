@@ -1,0 +1,1 @@
+../../src/cal/gemm_naive_float -wA=$1 -hA=$2 -wB=$3 -hB=$4 2>&1 | tee outputs/$5.out

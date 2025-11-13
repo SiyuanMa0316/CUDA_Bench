@@ -1,0 +1,1 @@
+python3 ../../src/cal/gemm_torch.py -i $1 -p $2 --gpu $3 $4 $5 2>&1 | tee outputs/$6.out
